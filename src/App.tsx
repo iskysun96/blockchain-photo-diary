@@ -6,7 +6,7 @@ import algosdk from 'algosdk'
 import { SnackbarProvider } from 'notistack'
 import { useState } from 'react'
 import Gallery from './components/Gallery'
-import MintNft from './components/mintNft'
+import Hero from './components/Hero'
 import { getAlgodConfigFromViteEnvironment, getKmdConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
 
 let providersArray: ProvidersArray
@@ -65,8 +65,12 @@ export default function App() {
     <SnackbarProvider maxSnack={3}>
       <WalletProvider value={walletProviders}>
         <div className="flex justify-center items-center flex-col">
-          <MintNft />
-          <Gallery />
+          <Hero />
+          {activeAddress && (
+            <div>
+              <Gallery />
+            </div>
+          )}
         </div>
       </WalletProvider>
     </SnackbarProvider>
