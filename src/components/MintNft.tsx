@@ -10,7 +10,7 @@ Wallet Connect
 Minting
 - Create drag and drop component for uploading images
 - Create input field for NFT name (one word to describe my emotion of the day)
-- create button to mint NFT
+- Create button to mint NFT
 - Integrate with Pinata to upload image to IPFS
 - Minting should:
   = upload image to IPFS
