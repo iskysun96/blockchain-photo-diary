@@ -2,7 +2,10 @@
 Gallery Component
 */
 
-import { useWallet } from '@txnlab/use-wallet'
+import { Asset, useWallet } from '@txnlab/use-wallet'
+import { useEffect } from 'react'
+
+const DIA = 'dia'
 
 // types
 export type GalleryItem = {
@@ -12,8 +15,7 @@ export type GalleryItem = {
 }
 
 const Gallery = () => {
-  // TODO: query all nfts with unitName that starts with "dia" from the connected account
-  const { activeAddress } = useWallet()
+  const wallet = useWallet()
 
   const fetchContent = (): GalleryItem[] => {
     return [
@@ -26,16 +28,38 @@ const Gallery = () => {
   }
   const galleryContents = fetchContent()
 
+  let diaAssets: Asset[] = []
+  useEffect(() => {
+    const fetchData = async () => {
+      if (wallet && wallet.activeAddress) {
+        try {
+          const assets = await wallet.getAssets()
+          diaAssets = assets.filter((asset) => asset['unit-name'].startsWith(DIA))
+        } catch (error) {
+          console.error('Error fetching assets:', error)
+        }
+      }
+    }
+
+    fetchData()
+  }, [wallet])
+
   return (
-    activeAddress && (
+    wallet.activeAddress && (
       <div className="grid grid-cols-4 gap-4 mt-8">
         {galleryContents.map((item, index) => (
-          // TODO: display the nfts in a grid with Create Date showing at the bottom of the image
           <div key={index} className="bg-white p-2 rounded-lg" style={{ border: '2px solid 	#b2d8d8' }}>
             <img src={item.imageUrl} className="w-full h-48 object-cover rounded-lg" />
             <p className="text-center text-sm mt-2">{item.date}</p>
           </div>
         ))}
+        {/* {diaAssets.map((item, index) => (
+          <div key={index} className="bg-white p-2 rounded-lg" style={{ border: '2px solid 	#b2d8d8' }}>
+            <img src={item.name} className="w-full h-48 object-cover rounded-lg" />
+            <p className="text-center text-sm mt-2">{'TODO: REPLACE THIS WITH ACTUAL DATE'}</p>
+            //{' '}
+          </div>
+        ))} */}
       </div>
     )
   )
