@@ -41,7 +41,7 @@ const NavItem = styled.div<NavItemProps>`
 `
 
 // styled component implementation
-export function Navbar({ setActiveTab, activeTab }: MyNavbarProps) {
+export const Navbar = ({ setActiveTab, activeTab }: MyNavbarProps) => {
   return (
     <StyledNavbar>
       <Title>Blockchain Photo Diary</Title>
@@ -56,7 +56,7 @@ export function Navbar({ setActiveTab, activeTab }: MyNavbarProps) {
 }
 
 // // tailwind implementation
-// export function Navbar({ activeTab, setActiveTab }: MyNavbarProps) {
+// export const Navbar = ({ setActiveTab, activeTab }: MyNavbarProps) => {
 //   return (
 //     <nav className="bg-gray-800 text-white flex items-center p-4">
 //       <h1 className="text-xl mr-8">Blockchain Photo Diary</h1>

@@ -5,6 +5,7 @@ import { PROVIDER_ID, ProvidersArray, WalletProvider, useInitializeProviders, us
 import algosdk from 'algosdk'
 import { SnackbarProvider } from 'notistack'
 import { useState } from 'react'
+import Gallery from './components/Gallery'
 import Hero from './components/Hero'
 import { Navbar } from './components/Navbar'
 import { getAlgodConfigFromViteEnvironment, getKmdConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
@@ -39,6 +40,7 @@ export default function App() {
   const [openWalletModal, setOpenWalletModal] = useState<boolean>(false)
   const [openDemoModal, setOpenDemoModal] = useState<boolean>(false)
   const [activeTab, setActiveTab] = useState(0) // 0 = Mint; 1 = Gallery
+
   const { activeAddress } = useWallet()
 
   const toggleWalletModal = () => {
@@ -68,12 +70,7 @@ export default function App() {
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
         <div className="flex justify-center items-center flex-col">
           {activeTab === 0 && <Hero />}
-          {activeTab === 1 && <></>}
-          {/* {activeAddress && (
-            <div>
-              <Gallery />
-            </div>
-          )} */}
+          {activeTab === 1 && <Gallery />}
         </div>
       </WalletProvider>
     </SnackbarProvider>
