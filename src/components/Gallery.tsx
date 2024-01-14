@@ -7,22 +7,16 @@ import { useEffect } from 'react'
 
 const DIA = 'dia'
 
-// types
-export type GalleryItem = {
-  imageUrl: string
-  address?: string // TODO: required
-  date: string // TODO: timestamp
-}
-
 const Gallery = () => {
   const wallet = useWallet()
 
-  const fetchContent = (): GalleryItem[] => {
+  // TODO: placeholder
+  const fetchContent = () => {
     return [
       {
         imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/The_Great_Wave_off_Kanagawa.jpg/1280px-The_Great_Wave_off_Kanagawa.jpg',
-        date: '2024-01-13',
+        date: 'happy 2024-01-13',
       },
     ]
   }
@@ -55,8 +49,8 @@ const Gallery = () => {
         ))}
         {/* {diaAssets.map((item, index) => (
           <div key={index} className="bg-white p-2 rounded-lg" style={{ border: '2px solid 	#b2d8d8' }}>
-            <img src={item.name} className="w-full h-48 object-cover rounded-lg" />
-            <p className="text-center text-sm mt-2">{'TODO: REPLACE THIS WITH ACTUAL DATE'}</p>
+            <img src={// TODO: get image url from IPFS} className="w-full h-48 object-cover rounded-lg" />
+            <p className="text-center text-sm mt-2">{item.name}</p>
             //{' '}
           </div>
         ))} */}
