@@ -67,11 +67,17 @@ export default function App() {
   return (
     <SnackbarProvider maxSnack={3}>
       <WalletProvider value={walletProviders}>
-        <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
-        <div className="flex justify-center items-center flex-col">
-          {activeTab === 0 && <Hero />}
-          {activeTab === 1 && <Gallery />}
-        </div>
+        {activeAddress ? (
+          <div>
+            <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+            <div className="flex justify-center items-center flex-col">
+              {activeTab === 0 && <Hero />}
+              {activeTab === 1 && <Gallery />}
+            </div>
+          </div>
+        ) : (
+          <Hero />
+        )}
       </WalletProvider>
     </SnackbarProvider>
   )
