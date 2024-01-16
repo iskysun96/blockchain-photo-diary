@@ -21,16 +21,20 @@ const Hero = () => {
               ? 'Enjoy your permanent photo diary recorded on the Algorand blockchain'
               : 'Welcome to your Photo Diary on the Blockchain. Connect your wallet to get started.'}
           </p>
-          <div>
-            <button
-              className="btn m-2 bg-green-500 rounded border-none hover:bg-green-600 transition-colors duration-300"
-              onClick={toggleWalletModal}
-            >
-              {activeAddress ? 'Disconnect' : 'Connect Wallet'}
-            </button>
-            <ConnectWallet openModal={openWalletModal} closeModal={toggleWalletModal} />
-          </div>
-          {activeAddress && <MintNft />}
+
+          {activeAddress ? (
+            <MintNft />
+          ) : (
+            <div>
+              <button
+                className="btn m-2 bg-green-500 rounded border-none hover:bg-green-600 transition-colors duration-300"
+                onClick={toggleWalletModal}
+              >
+                {activeAddress ? 'Disconnect' : 'Connect Wallet'}
+              </button>
+              <ConnectWallet openModal={openWalletModal} closeModal={toggleWalletModal} />
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,5 +1,7 @@
 // import styled from 'styled-components'
-
+import { useWallet } from '@txnlab/use-wallet'
+import { useState } from 'react'
+import ConnectWallet from './ConnectWallet'
 // types
 interface NavItemProps {
   active?: boolean
@@ -56,10 +58,16 @@ interface MyNavbarProps {
 
 // // tailwind implementation
 export const Navbar = ({ setActiveTab, activeTab }: MyNavbarProps) => {
+  const [openWalletModal, setOpenWalletModal] = useState<boolean>(false)
+  const { activeAddress } = useWallet()
+
+  const toggleWalletModal = () => {
+    setOpenWalletModal(!openWalletModal)
+  }
   return (
-    <nav className="bg-gray-800 text-white flex items-center p-4">
-      <h1 className="text-xl mr-8">Blockchain Photo Diary</h1>
-      <div className="flex">
+    <div className=" navbar bg-gray-800 text-white flex items-center p-4 h-16">
+      <h1 className="navbar-start text-xl mr-8">Blockchain Photo Diary</h1>
+      <div className="navbar-center flex">
         <div
           className={`mr-4 px-4 py-2 text-lg cursor-pointer rounded ${activeTab === 0 ? 'bg-gray-700' : ''}`}
           onClick={() => setActiveTab(0)}
@@ -70,6 +78,19 @@ export const Navbar = ({ setActiveTab, activeTab }: MyNavbarProps) => {
           Gallery
         </div>
       </div>
-    </nav>
+      <div className="navbar-end">
+        {activeAddress && (
+          <div className="flex-end">
+            <button
+              className="btn m-2 bg-green-500 rounded border-none hover:bg-green-600 transition-colors duration-300"
+              onClick={toggleWalletModal}
+            >
+              Disconnect
+            </button>
+            <ConnectWallet openModal={openWalletModal} closeModal={toggleWalletModal} />
+          </div>
+        )}
+      </div>
+    </div>
   )
 }
