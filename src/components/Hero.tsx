@@ -1,14 +1,19 @@
 import { useWallet } from '@txnlab/use-wallet'
 import { useState } from 'react'
 import ConnectWallet from './ConnectWallet'
-import MintNft from './mintNft'
+import MintNft from './MintNft'
 
 const Hero = () => {
   const [openWalletModal, setOpenWalletModal] = useState<boolean>(false)
+  const [openTransactModal, setOpenTransactModal] = useState<boolean>(false)
   const { activeAddress } = useWallet()
 
   const toggleWalletModal = () => {
     setOpenWalletModal(!openWalletModal)
+  }
+
+  const toggleTransactModal = () => {
+    setOpenTransactModal(!openTransactModal)
   }
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -23,11 +28,13 @@ const Hero = () => {
           </p>
 
           {activeAddress ? (
-            <MintNft />
+            <div>
+              <MintNft />
+            </div>
           ) : (
             <div>
               <button
-                className="btn m-2 bg-green-500 rounded border-none hover:bg-green-600 transition-colors duration-300"
+                className="btn m-2 bg-yellow-200 rounded border-none hover:bg-yellow-300 transition-colors duration-300"
                 onClick={toggleWalletModal}
               >
                 {activeAddress ? 'Disconnect' : 'Connect Wallet'}

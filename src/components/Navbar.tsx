@@ -3,9 +3,9 @@ import { useWallet } from '@txnlab/use-wallet'
 import { useState } from 'react'
 import ConnectWallet from './ConnectWallet'
 // types
-interface NavItemProps {
-  active?: boolean
-}
+// interface NavItemProps {
+//   active?: boolean
+// }
 
 interface MyNavbarProps {
   activeTab: number
@@ -82,7 +82,7 @@ export const Navbar = ({ setActiveTab, activeTab }: MyNavbarProps) => {
         {activeAddress && (
           <div className="flex-end">
             <button
-              className="btn m-2 bg-green-500 rounded border-none hover:bg-green-600 transition-colors duration-300"
+              className="btn m-2 bg-yellow-200 rounded border-none hover:bg-yellow-300 transition-colors duration-300"
               onClick={toggleWalletModal}
             >
               Disconnect
