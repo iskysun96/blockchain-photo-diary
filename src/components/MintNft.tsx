@@ -42,7 +42,7 @@ const MintNft = () => {
   const formattedDate = today.toLocaleDateString('en-CA')
   const DateWithoutDashes = formattedDate.replace(/-/g, '').substring(2)
 
-  const onDrop = useCallback((acceptedFiles: FileList) => {
+  const onDrop = useCallback(<T extends File>(acceptedFiles: T[]) => {
     // setNFTImageUrl to preview image
     setNftImage(acceptedFiles[0])
     const reader = new FileReader()
