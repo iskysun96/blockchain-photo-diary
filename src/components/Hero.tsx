@@ -12,7 +12,7 @@ const Hero = () => {
   }
 
   return (
-    <div className="hero min-h-screen" style={{ backgroundImage: "url('../../public/imgs/hero-background.jpg')" }}>
+    <div className="hero min-h-screen" style={{ backgroundImage: "url('assets/hero-background.jpg')" }}>
       <div className="hero-content text-center">
         <div className="max-w-md text-white">
           {activeAddress ? (
