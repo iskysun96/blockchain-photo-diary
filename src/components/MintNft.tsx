@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /*
 NFT Minting / Wallet Connect component
 
@@ -105,7 +106,7 @@ const MintNft = () => {
         decimals: 0,
       })
 
-      const { transaction, confirmation } = await algokit.sendTransaction(
+      const { confirmation } = await algokit.sendTransaction(
         {
           transaction: nftCreateTxn,
           from: signingAccount,

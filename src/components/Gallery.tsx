@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /*
 Gallery Component
@@ -12,7 +13,6 @@ const PD = 'pd'
 
 const Gallery = () => {
   const [diaryAssets, setDiaryAssets] = useState<Record<string, any>[]>([])
-  const [diaryAssetsUrls, setDiaryAssetsUrls] = useState<string[]>([])
   const wallet = useWallet()
 
   // Set up algod, Indexer
