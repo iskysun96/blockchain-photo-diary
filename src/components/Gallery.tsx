@@ -1,34 +1,54 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
 Gallery Component
 */
 
-import { Asset, useWallet } from '@txnlab/use-wallet'
-import { useEffect } from 'react'
+import { useWallet } from '@txnlab/use-wallet'
+import { useEffect, useState } from 'react'
+import { getAlgodClient } from '../utils/setupClients'
 
-const DIA = 'dia'
+const PD = 'pd'
 
 const Gallery = () => {
+  const [diaryAssets, setDiaryAssets] = useState<Record<string, any>[]>([])
   const wallet = useWallet()
 
-  // TODO: placeholder
-  const fetchContent = () => {
-    return [
-      {
-        imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/The_Great_Wave_off_Kanagawa.jpg/1280px-The_Great_Wave_off_Kanagawa.jpg',
-        date: 'happy 2024-01-13',
-      },
-    ]
-  }
-  const galleryContents = fetchContent()
+  // Set up algod, Indexer
+  const algodClient = getAlgodClient()
 
-  let diaAssets: Asset[] = []
+  const fetchAssetUnitNames = async () => {
+    if (wallet && wallet.activeAddress) {
+      try {
+        const balances = await wallet.getAssets()
+        const diaryAssets: Record<string, unknown>[] = []
+
+        for (const balance of balances) {
+          const assetInfo = await algodClient.getAssetByID(balance['asset-id']).do()
+          if (assetInfo.params['unit-name'] === undefined) {
+            continue
+          }
+
+          if (assetInfo.params['unit-name'].startsWith(PD)) {
+            diaryAssets.push(assetInfo)
+          }
+        }
+        return diaryAssets
+      } catch (error) {
+        console.error('Error fetching asset balances:', error)
+        return
+      }
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       if (wallet && wallet.activeAddress) {
         try {
-          const assets = await wallet.getAssets()
-          diaAssets = assets.filter((asset) => asset['unit-name'].startsWith(DIA))
+          const assets = await fetchAssetUnitNames()
+          if (assets === undefined) {
+            return
+          }
+          setDiaryAssets(assets)
         } catch (error) {
           console.error('Error fetching assets:', error)
         }
@@ -36,24 +56,28 @@ const Gallery = () => {
     }
 
     fetchData()
-  }, [wallet])
+    console.log('diaryAssets: ', diaryAssets)
+  }, [])
+
+  const getIpfsUrl = (url: string) => {
+    const slicedUrl = url.slice(7, url.length - 6)
+    console.log('slicedUrl: ', slicedUrl)
+    const fullUrl = `https://ipfs.algonode.xyz/ipfs/${slicedUrl}?optimizer=image&width=75`
+    console.log('fullUrl: ', fullUrl)
+    return fullUrl
+  }
 
   return (
-    wallet.activeAddress && (
+    wallet.activeAddress &&
+    diaryAssets?.length > 0 && (
       <div className="grid grid-cols-4 gap-4 mt-8">
-        {galleryContents.map((item, index) => (
+        {diaryAssets?.map((item, index) => (
           <div key={index} className="bg-white p-2 rounded-lg" style={{ border: '2px solid 	#b2d8d8' }}>
-            <img src={item.imageUrl} className="w-full h-48 object-cover rounded-lg" />
-            <p className="text-center text-sm mt-2">{item.date}</p>
-          </div>
-        ))}
-        {/* {diaAssets.map((item, index) => (
-          <div key={index} className="bg-white p-2 rounded-lg" style={{ border: '2px solid 	#b2d8d8' }}>
-            <img src={// TODO: get image url from IPFS} className="w-full h-48 object-cover rounded-lg" />
-            <p className="text-center text-sm mt-2">{item.name}</p>
+            <img src={getIpfsUrl(item.params['url'])} className="w-full h-48 object-cover rounded-lg" optimi />
+            <p className="text-center text-sm mt-2">{item.params['name']}</p>
             //{' '}
           </div>
-        ))} */}
+        ))}
       </div>
     )
   )
