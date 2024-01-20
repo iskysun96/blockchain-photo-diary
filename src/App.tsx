@@ -1,13 +1,10 @@
 import { DeflyWalletConnect } from '@blockshake/defly-connect'
 import { DaffiWalletConnect } from '@daffiwallet/connect'
 import { PeraWalletConnect } from '@perawallet/connect'
-import { PROVIDER_ID, ProvidersArray, WalletProvider, useInitializeProviders, useWallet } from '@txnlab/use-wallet'
+import { PROVIDER_ID, ProvidersArray, WalletProvider, useInitializeProviders } from '@txnlab/use-wallet'
 import algosdk from 'algosdk'
 import { SnackbarProvider } from 'notistack'
-import { useState } from 'react'
-import Gallery from './components/Gallery'
-import Hero from './components/Hero'
-import { Navbar } from './components/Navbar'
+import ActiveTab from './pages/ActiveTab'
 import { getAlgodConfigFromViteEnvironment, getKmdConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
 
 let providersArray: ProvidersArray
@@ -37,10 +34,6 @@ if (import.meta.env.VITE_ALGOD_NETWORK === '') {
 }
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState(0) // 0 = Mint; 1 = Gallery
-
-  const { activeAddress } = useWallet()
-
   const algodConfig = getAlgodConfigFromViteEnvironment()
 
   const walletProviders = useInitializeProviders({
@@ -57,15 +50,7 @@ export default function App() {
   return (
     <SnackbarProvider maxSnack={3}>
       <WalletProvider value={walletProviders}>
-        {activeAddress ? (
-          <div>
-            <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
-            {activeTab === 0 && <Hero />}
-            {activeTab === 1 && <Gallery />}
-          </div>
-        ) : (
-          <Hero />
-        )}
+        <ActiveTab />
       </WalletProvider>
     </SnackbarProvider>
   )
