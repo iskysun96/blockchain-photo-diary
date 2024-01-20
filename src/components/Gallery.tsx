@@ -52,6 +52,7 @@ const Gallery = () => {
         return
       }
     }
+    return
   }
 
   useEffect(() => {
