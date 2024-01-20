@@ -35,7 +35,7 @@ const MintNft = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const { enqueueSnackbar } = useSnackbar()
-  const { signer, activeAddress, signTransactions, sendTransactions } = useWallet()
+  const { signer, activeAddress } = useWallet()
 
   const today = new Date()
   const formattedDate = today.toLocaleDateString('en-CA')
