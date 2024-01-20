@@ -70,10 +70,8 @@ export default function App() {
         {activeAddress ? (
           <div>
             <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
-            <div className="flex justify-center items-center flex-col">
-              {activeTab === 0 && <Hero />}
-              {activeTab === 1 && <Gallery />}
-            </div>
+            {activeTab === 0 && <Hero />}
+            {activeTab === 1 && <Gallery />}
           </div>
         ) : (
           <Hero />
