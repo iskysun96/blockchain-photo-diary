@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /*
 NFT Minting / Wallet Connect component
 
@@ -35,7 +36,7 @@ const MintNft = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const { enqueueSnackbar } = useSnackbar()
-  const { signer, activeAddress, signTransactions, sendTransactions } = useWallet()
+  const { signer, activeAddress } = useWallet()
 
   const today = new Date()
   const formattedDate = today.toLocaleDateString('en-CA')
@@ -105,7 +106,7 @@ const MintNft = () => {
         decimals: 0,
       })
 
-      const { transaction, confirmation } = await algokit.sendTransaction(
+      const { confirmation } = await algokit.sendTransaction(
         {
           transaction: nftCreateTxn,
           from: signingAccount,

@@ -37,19 +37,9 @@ if (import.meta.env.VITE_ALGOD_NETWORK === '') {
 }
 
 export default function App() {
-  const [openWalletModal, setOpenWalletModal] = useState<boolean>(false)
-  const [openDemoModal, setOpenDemoModal] = useState<boolean>(false)
   const [activeTab, setActiveTab] = useState(0) // 0 = Mint; 1 = Gallery
 
   const { activeAddress } = useWallet()
-
-  const toggleWalletModal = () => {
-    setOpenWalletModal(!openWalletModal)
-  }
-
-  const toggleDemoModal = () => {
-    setOpenDemoModal(!openDemoModal)
-  }
 
   const algodConfig = getAlgodConfigFromViteEnvironment()
 
@@ -70,10 +60,8 @@ export default function App() {
         {activeAddress ? (
           <div>
             <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
-            <div className="flex justify-center items-center flex-col">
-              {activeTab === 0 && <Hero />}
-              {activeTab === 1 && <Gallery />}
-            </div>
+            {activeTab === 0 && <Hero />}
+            {activeTab === 1 && <Gallery />}
           </div>
         ) : (
           <Hero />
