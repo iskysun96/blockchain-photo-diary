@@ -5,33 +5,33 @@ import { PROVIDER_ID, ProvidersArray, WalletProvider, useInitializeProviders } f
 import algosdk from 'algosdk'
 import { SnackbarProvider } from 'notistack'
 import ActiveTab from './pages/ActiveTab'
-import { getAlgodConfigFromViteEnvironment, getKmdConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
+import { getAlgodConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
 
-let providersArray: ProvidersArray
-if (import.meta.env.VITE_ALGOD_NETWORK === '') {
-  const kmdConfig = getKmdConfigFromViteEnvironment()
-  providersArray = [
-    {
-      id: PROVIDER_ID.KMD,
-      clientOptions: {
-        wallet: kmdConfig.wallet,
-        password: kmdConfig.password,
-        host: kmdConfig.server,
-        token: String(kmdConfig.token),
-        port: String(kmdConfig.port),
-      },
-    },
-  ]
-} else {
-  providersArray = [
-    { id: PROVIDER_ID.DEFLY, clientStatic: DeflyWalletConnect },
-    { id: PROVIDER_ID.PERA, clientStatic: PeraWalletConnect },
-    { id: PROVIDER_ID.DAFFI, clientStatic: DaffiWalletConnect },
-    { id: PROVIDER_ID.EXODUS },
-    // If you are interested in WalletConnect v2 provider
-    // refer to https://github.com/TxnLab/use-wallet for detailed integration instructions
-  ]
-}
+// let providersArray: ProvidersArray
+// if (import.meta.env.VITE_ALGOD_NETWORK === '') {
+//   const kmdConfig = getKmdConfigFromViteEnvironment()
+//   providersArray = [
+//     {
+//       id: PROVIDER_ID.KMD,
+//       clientOptions: {
+//         wallet: kmdConfig.wallet,
+//         password: kmdConfig.password,
+//         host: kmdConfig.server,
+//         token: String(kmdConfig.token),
+//         port: String(kmdConfig.port),
+//       },
+//     },
+//   ]
+// } else {
+const providersArray: ProvidersArray = [
+  { id: PROVIDER_ID.DEFLY, clientStatic: DeflyWalletConnect },
+  { id: PROVIDER_ID.PERA, clientStatic: PeraWalletConnect },
+  { id: PROVIDER_ID.DAFFI, clientStatic: DaffiWalletConnect },
+  { id: PROVIDER_ID.EXODUS },
+  // If you are interested in WalletConnect v2 provider
+  // refer to https://github.com/TxnLab/use-wallet for detailed integration instructions
+]
+// }
 
 export default function App() {
   const algodConfig = getAlgodConfigFromViteEnvironment()
