@@ -42,7 +42,8 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "styled-components": "^6.1.8",
-    "tslib": "^2.6.2"
+    "tslib": "^2.6.2",
+    "vercel": "^33.2.0"
   },
   "scripts": {
     "dev": "vite",
