@@ -77,7 +77,7 @@ const Gallery = () => {
     wallet.activeAddress && (
       <div className="flex justify-center min-h-screen">
         {diaryAssets.length > 0 ? (
-          <div className="container grid grid-cols-4 gap-4 mt-8">
+          <div className="container grid grid-cols-4 gap-4 mt-8 h-full">
             {diaryAssets.map((item, index) => (
               <div key={index} className="bg-white p-2 rounded-lg" style={{ border: '2px solid 	#b2d8d8' }}>
                 <img src={diaryAssets[index].image} className="w-full h-48 object-cover rounded-lg" alt="Photo Diary" />

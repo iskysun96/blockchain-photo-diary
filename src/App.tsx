@@ -4,7 +4,7 @@ import { PeraWalletConnect } from '@perawallet/connect'
 import { PROVIDER_ID, ProvidersArray, WalletProvider, useInitializeProviders } from '@txnlab/use-wallet'
 import algosdk from 'algosdk'
 import { SnackbarProvider } from 'notistack'
-import ActiveTab from './pages/ActiveTab'
+import Home from './Home'
 import { getAlgodConfigFromViteEnvironment, getKmdConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
 
 let providersArray: ProvidersArray
@@ -27,7 +27,6 @@ if (import.meta.env.VITE_ALGOD_NETWORK === '') {
     { id: PROVIDER_ID.DEFLY, clientStatic: DeflyWalletConnect },
     { id: PROVIDER_ID.PERA, clientStatic: PeraWalletConnect },
     { id: PROVIDER_ID.DAFFI, clientStatic: DaffiWalletConnect },
-    { id: PROVIDER_ID.EXODUS },
     // If you are interested in WalletConnect v2 provider
     // refer to https://github.com/TxnLab/use-wallet for detailed integration instructions
   ]
@@ -50,7 +49,7 @@ export default function App() {
   return (
     <SnackbarProvider maxSnack={3}>
       <WalletProvider value={walletProviders}>
-        <ActiveTab />
+        <Home />
       </WalletProvider>
     </SnackbarProvider>
   )

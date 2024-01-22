@@ -1,10 +1,10 @@
 import { useWallet } from '@txnlab/use-wallet'
 import { useState } from 'react'
-import Gallery from '../components/Gallery'
-import Hero from '../components/Hero'
-import { Navbar } from '../components/Navbar'
+import Gallery from './components/Gallery'
+import Hero from './components/Hero'
+import { Navbar } from './components/Navbar'
 
-const ActiveTab = () => {
+const Home = () => {
   const [activeTab, setActiveTab] = useState(0) // 0 = Mint; 1 = Gallery
 
   const { activeAddress } = useWallet()
@@ -24,4 +24,4 @@ const ActiveTab = () => {
   )
 }
 
-export default ActiveTab
+export default Home

@@ -65,16 +65,19 @@ export const Navbar = ({ setActiveTab, activeTab }: MyNavbarProps) => {
     setOpenWalletModal(!openWalletModal)
   }
   return (
-    <div className=" navbar bg-gray-800 text-white flex items-center p-4 h-16">
-      <h1 className="navbar-start text-xl mr-8">Blockchain Photo Diary</h1>
+    <div className=" navbar bg-gray-800 flex items-center p-4 h-16">
+      <h1 className="navbar-start text-xl mr-8 text-white">Blockchain Photo Diary</h1>
       <div className="navbar-center flex">
         <div
-          className={`mr-4 px-4 py-2 text-lg cursor-pointer rounded ${activeTab === 0 ? 'bg-gray-700' : ''}`}
+          className={`mr-4 px-4 py-2 text-lg cursor-pointer rounded text-white ${activeTab === 0 ? 'bg-gray-700' : ''}`}
           onClick={() => setActiveTab(0)}
         >
           Mint
         </div>
-        <div className={`px-4 py-2 text-lg cursor-pointer rounded ${activeTab === 1 ? 'bg-gray-700' : ''}`} onClick={() => setActiveTab(1)}>
+        <div
+          className={`px-4 py-2 text-lg cursor-pointer rounded text-white ${activeTab === 1 ? 'bg-gray-700' : ''}`}
+          onClick={() => setActiveTab(1)}
+        >
           Gallery
         </div>
       </div>
