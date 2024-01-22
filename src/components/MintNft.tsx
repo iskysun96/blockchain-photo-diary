@@ -2,7 +2,7 @@
 /*
 NFT Minting / Wallet Connect component
 
-TODO
+TODO:
 
 Wallet Connect
 - Create button to connect wallet
