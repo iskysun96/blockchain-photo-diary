@@ -142,7 +142,7 @@ const MintNft = () => {
           <input
             type="text"
             placeholder="What did you do today?"
-            className="input rounded-r w-full my-4 font-black"
+            className="input rounded-r w-full my-4 text-black"
             onChange={handleTextInput}
             maxLength={21} //max asa name is 32 bytes so 32 characters long. 11 characters for date
           />
