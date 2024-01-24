@@ -35,7 +35,7 @@ const Gallery = () => {
 
         for (const balance of balances) {
           const assetInfo = await algodClient.getAssetByID(balance['asset-id']).do()
-          if (assetInfo.params['unit-name'] === undefined) {
+          if (assetInfo.params['unit-name'] === undefined || assetInfo.params['url'] === 'ipfs://undefined/#arc3') {
             continue
           }
 
@@ -63,6 +63,7 @@ const Gallery = () => {
           if (assets === undefined) {
             return
           }
+          console.log(assets)
           setDiaryAssets(assets)
         } catch (error) {
           console.error('Error fetching assets:', error)
